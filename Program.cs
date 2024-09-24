@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using YohualkisTejada_AP1_P1.Components;
+using YohualkisTejada_AP1_P1.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +8,22 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+
+// Getting Connection String
+var ConStr = builder.Configuration.GetConnectionString("ConStr");
+
+// Injecting Connection String
+builder.Services.AddDbContext<Contexto>(o => o.UseSqlite(ConStr));
+
+// Injecting Service to the program
+
+
+
+
+
+
+
+// DE AQUI PA RRIBA BRODEL
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
