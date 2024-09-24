@@ -1,0 +1,70 @@
+﻿@page "/Registro/Index"
+@using YohualkisTejada_AP1_P1.Models
+@rendermode InteractiveServer
+@inject NavigationManager navigationManager
+
+<PageTitle>Registro Index</PageTitle>
+<div class="container">
+	<div class="card shadow-lg">
+		@*HEADER*@
+		<div class="card-header">
+			<h5 class="card-title">Registro</h5>
+		</div>
+
+		@*BODY*@
+		<div class="card-body">
+			<a href="#" class="btn btn-primary">
+				<span class="bi bi-plus-square-fill">Crear</span>
+			</a>
+
+			<table class="table table-striped-columns table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nombres</th>
+						<th>Ver</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach(var registro in ListaRegistros)
+					{
+						<tr>
+							<td>@registro.RegistroId</td>
+							<td>@registro.Nombre</td>
+
+							@*Ver*@
+							<td>
+								<a type="button" class="btn btn-outline-dark btn-outline-light bi bi-eye-fill" style="background-color: #8a33ff"
+								   href="/Prioridades/View/@registro.RegistroId"></a>
+							</td>
+
+							@*Editar*@
+							<td>
+								<a type="button" class="btn btn-outline-dark btn-outline-light bi bi-pencil-fill" style="background-color: #ffc300"
+								   href="/Prioridades/Modify/@registro.RegistroId"></a>
+							</td>
+
+							@*Eliminar*@
+							<td>
+								<a type="button" class="btn btn-outline-dark btn-outline-light bi bi-trash3-fill" style="background-color: #ff3333"
+								   href="/Prioridades/Delete/@registro.RegistroId"></a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+		@*FOOTER*@
+		<div class="card-footer">
+			<p><strong>Cantidad de Registros: </strong>@ListaRegistros.Count</p>
+		</div>
+	</div>
+</div>
+
+@code {
+	public Registros Registro { get; set; } = new Registros();
+	public List<Registros> ListaRegistros { get; set; } = new List<Registros>();
+}
