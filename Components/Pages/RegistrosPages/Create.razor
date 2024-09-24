@@ -1,4 +1,35 @@
-﻿<h3>Create</h3>
+﻿@page "/Registro/Create"
+
+@rendermode InteractiveServer
+@inject NavigationManager navigationManager
+
+<PageTitle>Registro Create</PageTitle>
+<div class="container">
+	<div class="card shadow-lg">
+		@*HEADER*@
+		<div class="card-header">
+			<h5 class="card-title">Crear Nuevo Registro</h5>
+		</div>
+
+		@*BODY*@
+		<div class="card-body">
+							
+		</div>
+
+		@*FOOTER*@
+		<div class="card-footer">
+			@*BTN VOLVER*@
+			<a href="/Registro/Index" class="btn btn-primary">
+				<span class="bi bi-arrow-left mt-3">Volver</span>
+			</a>
+			@*BTN CREAR*@
+			<a href="/Registro/Index" class="btn btn-primary">
+				<span class="bi bi-floppy mt-3">Guardar</span>
+			</a>
+		</div>
+	</div>
+</div>
+
 
 @code {
 
