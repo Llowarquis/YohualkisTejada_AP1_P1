@@ -17,4 +17,5 @@ public class Prestamos
 
 	[Required(ErrorMessage = "Este campo es obligatorio.")]
 	[RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Este campo solo puede alojar números.")]
+	public double Monto { get; set; }
 }
