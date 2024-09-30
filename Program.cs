@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using YohualkisTejada_AP1_P1.Components;
 using YohualkisTejada_AP1_P1.DAL;
+using YohualkisTejada_AP1_P1.Models;
+using YohualkisTejada_AP1_P1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,7 @@ var ConStr = builder.Configuration.GetConnectionString("ConStr");
 builder.Services.AddDbContext<Contexto>(o => o.UseSqlite(ConStr));
 
 // Injecting Service to the program
-
+builder.Services.AddScoped<PrestamosService>();
 
 
 
