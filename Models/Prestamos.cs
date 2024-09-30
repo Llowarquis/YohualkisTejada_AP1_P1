@@ -11,7 +11,6 @@ public class Prestamos
 	[Required(ErrorMessage = "Este campo es obligatorio.")]
 	public string? Deudor { get; set; }
 
-	[RegularExpression(@"^[a-zA-Z-ÁáÉéÍíÓóÚúÑñ\s]+$", ErrorMessage = "Este campo solo puede alojar letras/espacios.")]
 	[Required(ErrorMessage = "Este campo es obligatorio.")]
 	public string? Concepto { get; set; }
 
