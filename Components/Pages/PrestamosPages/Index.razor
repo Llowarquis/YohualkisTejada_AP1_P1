@@ -16,11 +16,6 @@
 		<div class="card-body">
 			
 			<div class="row">
-				@*INPUTNUMBER para buscar por ID*@
-				<div class="col text-end input-group" style="width: 500px">
-					<input type="number" placeholder="Buscar" class="form-control" @bind="Prestamo.PrestamoId" />
-					<button class="btn btn-success bi bi-search" @onclick="Buscar">  Buscar</button>
-				</div>
 				@*BTN CREAR*@
 				<div class="col text-end">
 					<a href="/Prestamos/Create" class="btn btn-success" type="button"><span class="bi bi-plus-square"></span> Crear </a>
@@ -82,16 +77,11 @@
 @code {
 	public Prestamos Prestamo { get; set; } = new Prestamos();
 	public List<Prestamos> ListaPrestamos { get; set; } = new List<Prestamos>();
+	public string valorFiltro { get; set; } = string.Empty;
+	public string filtro { get; set; } = string.Empty;
 
 	protected override async Task OnInitializedAsync()
 	{
 		ListaPrestamos = await prestamosService.Listar(lp => true);
-	}
-
-	public async Task Buscar()
-	{
-		if (await prestamosService.Buscar(Prestamo.PrestamoId) != null)
-			navigationManager.NavigateTo($"Prestamos/Details/{Prestamo.PrestamoId}");
-	}
-	
+	}	
 }
