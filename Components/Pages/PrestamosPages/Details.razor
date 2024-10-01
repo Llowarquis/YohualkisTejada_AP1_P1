@@ -1,0 +1,45 @@
+﻿@page "/Prestamos/Details/{PrestamoID:int}"
+
+@inject NavigationManager navigationManager
+@inject PrestamosService prestamosService
+@rendermode InteractiveServer
+
+<PageTitle>Prestamo Details</PageTitle>
+<div class="container">
+	<div class="card shadow-lg">
+		@*HEADER*@
+		<div class="card-header">
+			<h3 class="card-title">Detalles del Prestamo</h3>
+		</div>
+
+		@*BODY*@
+		<div class="card-body">
+			<h5><strong>Visualizaci&oacute;n del Prestamo actual</strong></h5>
+			<ul>
+				<li><strong>ID:</strong> @Prestamo.PrestamoId</li>
+				<li><strong>Deudor:</strong> @Prestamo.Deudor</li>
+				<li><strong>Concepto:</strong> @Prestamo.Concepto</li>
+				<li><strong>RD$:</strong> @Prestamo.Monto</li>
+			</ul>
+		</div>
+
+		@*FOOTER*@
+		<div class="card-footer">
+			@*BTN VOLVER*@
+			<a href="/Prestamos/Index" class="btn btn-primary" type="button">
+				<span class="bi bi-arrow-left mt-3">   Volver</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public int PrestamoID { get; set; }
+	public Prestamos Prestamo { get; set; } = new Prestamos();
+
+	protected override async Task OnInitializedAsync()
+	{
+		Prestamo = await prestamosService.Buscar(PrestamoID);
+	}
+}
