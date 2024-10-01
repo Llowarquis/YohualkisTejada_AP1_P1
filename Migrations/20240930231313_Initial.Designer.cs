@@ -10,7 +10,7 @@ using YohualkisTejada_AP1_P1.DAL;
 namespace YohualkisTejada_AP1_P1.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20240923233335_Initial")]
+    [Migration("20240930231313_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -18,6 +18,28 @@ namespace YohualkisTejada_AP1_P1.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
+
+            modelBuilder.Entity("YohualkisTejada_AP1_P1.Models.Prestamos", b =>
+                {
+                    b.Property<int>("PrestamoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Concepto")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Deudor")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Monto")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("PrestamoId");
+
+                    b.ToTable("Prestamos");
+                });
 
             modelBuilder.Entity("YohualkisTejada_AP1_P1.Models.Registros", b =>
                 {
