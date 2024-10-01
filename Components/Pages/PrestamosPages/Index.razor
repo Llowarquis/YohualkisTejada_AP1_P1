@@ -1,0 +1,93 @@
+﻿@page "/Prestamos/Index"
+
+@rendermode InteractiveServer
+@inject NavigationManager navigationManager
+@inject PrestamosService prestamosService
+
+<PageTitle>Prestamos Index</PageTitle>
+<div class="container">
+	<div class="card shadow-lg">
+		@*HEADER*@
+		<div class="card-header">
+			<h3 class="card-title text-center"><strong>Consulta de Prestamos</strong></h3>
+		</div>
+
+		@*BODY*@
+		<div class="card-body">
+			<div class="row">
+				<div class="input-group">
+					<input class="form-control" placeholder="B&uacute;squeda">
+					<button class="btn btn-success bi bi-search">  Buscar</button>
+				</div>
+				<div class="col-10 text-end">
+					<a href="/Prestamos/Create" class="btn btn-success" type="button"><span class="bi bi-plus-square"></span> Crear </a>
+				</div>
+			</div>
+
+			<table class="table table-striped-columns table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Deudor</th>
+						<th>Concepto</th>
+						<th>Monto</th>
+						<th>Ver</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach(var prestamos in ListaPrestamos)
+					{
+						<tr>
+							<td>@prestamos.PrestamoId</td>
+							<td>@prestamos.Deudor</td>
+							<td>@prestamos.Concepto</td>
+							<td>RD$ @prestamos.Monto</td>
+
+							@*Ver*@
+							<td>
+								<a type="button" class="btn btn-outline-dark btn-outline-light bi bi-eye" style="background-color: #8a33ff"
+								   href="/Prestamos/Details/@prestamos.PrestamoId"></a>
+							</td>
+
+							@*Editar*@
+							<td>
+								<a type="button" class="btn btn-outline-dark btn-outline-light bi bi-pencil-square" style="background-color: #ffc300"
+								   href="/Prestamos/Edit/@prestamos.PrestamoId"></a>
+							</td>
+
+							@*Eliminar*@
+							<td>
+								<a type="button" class="btn btn-outline-dark btn-outline-light bi bi-trash" style="background-color: #ff3333"
+								   href="/Prestamos/Delete/@prestamos.PrestamoId"></a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+		@*FOOTER*@
+		<div class="card-footer">
+			<p><strong>Cantidad de Prestamos: </strong>@ListaPrestamos.Count</p>
+		</div>
+	</div>
+</div>
+
+@code {
+	public Prestamos Prestamo { get; set; } = new Prestamos();
+	public List<Prestamos> ListaPrestamos { get; set; } = new List<Prestamos>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		ListaPrestamos = await prestamosService.Listar(lp => true);
+	}
+
+	public async Task Buscar()
+	{
+		if (await prestamosService.Buscar(Prestamo.PrestamoId) != null)
+			ListaPrestamos = await prestamosService.Listar(lp => true);
+	}
+	
+}
