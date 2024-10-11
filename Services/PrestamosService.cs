@@ -52,6 +52,7 @@ namespace YohualkisTejada_AP1_P1.Services
 		public async Task<Prestamos?> Buscar(int id)
 		{
 			return await _contexto.Prestamos
+				.Include(d => d.Deudor)
 				.AsNoTracking()
 				.FirstOrDefaultAsync(t => t.PrestamoId == id);
 		}
@@ -60,6 +61,7 @@ namespace YohualkisTejada_AP1_P1.Services
 		public async Task<List<Prestamos>> Listar(Expression<Func<Prestamos, bool>> criterio)
 		{
 			return await _contexto.Prestamos
+				.Include(d => d.Deudor)
 				.AsNoTracking()
 				.Where(criterio)
 				.ToListAsync();
@@ -69,7 +71,7 @@ namespace YohualkisTejada_AP1_P1.Services
 		public async Task<bool> ExisteDeudor(string? deudor)
 		{
 			return await _contexto?.Prestamos
-				.AnyAsync(e => e.Deudor.Trim().ToLower().Equals(deudor.Trim().ToLower()));
+				.AnyAsync(e => e.Nombres.Trim().ToLower().Equals(deudor.Trim().ToLower()));
 		}
 	}
 }
