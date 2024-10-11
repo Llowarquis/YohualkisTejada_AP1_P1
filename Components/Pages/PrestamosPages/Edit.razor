@@ -25,8 +25,8 @@
 				@*Campo Deudor*@
 				<div>
 					<label class="form-label"><strong>Deudor:</strong></label>
-					<InputText class="form-control" @bind-Value="@Prestamo.Deudor" placeholder="Nombre Deudor"></InputText>
-					<ValidationMessage For="@(() => Prestamo.Deudor)"></ValidationMessage>
+					<InputText class="form-control" @bind-Value="@Prestamo.Nombres" placeholder="Nombre Deudor"></InputText>
+					<ValidationMessage For="@(() => Prestamo.Nombres)"></ValidationMessage>
 				</div>
 
 				@*Campo Concepto*@
@@ -70,7 +70,7 @@
 
 	public async Task Guardar()
 	{
-		if (await prestamosService.ExisteDeudor(Prestamo.Deudor))
+		if (await prestamosService.ExisteDeudor(Prestamo.Nombres))
 		{
 			Mensaje = "Ya existe un prestamo con el mismo deudor.";
 			return;
