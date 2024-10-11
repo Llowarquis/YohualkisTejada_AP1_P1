@@ -19,6 +19,7 @@ builder.Services.AddDbContext<Contexto>(o => o.UseSqlite(ConStr));
 
 // Injecting Service to the program
 builder.Services.AddScoped<PrestamosService>();
+builder.Services.AddScoped<DeudoresService>();
 
 
 
